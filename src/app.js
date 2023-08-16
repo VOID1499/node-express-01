@@ -11,7 +11,7 @@ const app = express();
 dotenv.config();
 
 app.use(cors({
-    origin:"*", //origenes aceptados
+    //origin:"*", //origenes aceptados
     credentials:true, //permite establecer cookies
     //allowedHeaders:"*", //encabezados aceptados
     //methods:["GET","POST","PUT","DELETE","PATCH"]
