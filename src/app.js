@@ -29,6 +29,11 @@ app.use(express.json({
 
 }));
 
+
+app.get("/",(req,res)=>{
+  res.status(200).send("Hello world!")
+});
+
 app.use("/api", authRoutes);
 app.use("/api", tasksRoutes);
 
