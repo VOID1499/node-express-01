@@ -31,6 +31,7 @@ app.use(express.json({
 
 
 app.get("/",(req,res)=>{
+  console.log(process.env.DB_USER)
   res.status(200).send("Hello world!")
 });
 
