@@ -17,9 +17,11 @@ export const register = async (req, res) => {
     const token = await createToken({ id: userSaved._id });
 
     res.cookie("token", token);
-    res.status(200).json({ message: "Usuario registado!" });
+    res.status(200).json(userSaved);
   } catch (error) {
-    res.json({message:error})
+    if(error.code == "11000") return res.status(400).json({error:[`${Object.values(error.keyValue)[0]} no disponible`]})
+    res.status(400).json(error);
+
   }
 };
 

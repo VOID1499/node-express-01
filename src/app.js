@@ -11,8 +11,8 @@ const app = express();
 dotenv.config();
 
 app.use(cors({
-    //origin:"*", //origenes aceptados
-    //credentials:true, //permite establecer cookies
+    origin:"https://void1499.github.io/taskAPP/", //origenes aceptados
+    credentials:true, //permite establecer cookies
     //allowedHeaders:"*", //encabezados aceptados
     //methods:["GET","POST","PUT","DELETE","PATCH"]
   }));
