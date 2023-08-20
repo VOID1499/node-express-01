@@ -9,12 +9,12 @@ import tasksRoutes from "./routes/tasks.routes.js";
 
 const app = express();
 dotenv.config();
-const allowedOrigins = ['https://task-app-rtam.onrender.com'];
+
 app.use(cors({
-    origin:allowedOrigins, 
-    allowedHeaders: 'Content-Type, Authorization',
+    origin:"https://task-app-rtam.onrender.com", 
+    allowedHeaders: "Content-Type, Authorization",
     credentials: true,
-    
+    sameSite:"none"
   }));
   
   app.use(cookieParser());
