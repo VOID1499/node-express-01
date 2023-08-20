@@ -18,7 +18,8 @@ export const register = async (req, res) => {
 
     res.cookie("token", token,{
       secure:true,
-      httpOnly:false
+      httpOnly:false,
+      sameSite:'none'
     });
     res.status(200).json(userSaved);
   } catch (error) {
