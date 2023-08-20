@@ -22,7 +22,8 @@ export const register = async (req, res) => {
     res.cookie("token", token,{
       secure:true,
       sameSite:'none',
-      httpOnly:false
+      httpOnly:false,
+      
     });
     res.status(200).json(userSaved);
   } catch (error) {
@@ -49,7 +50,8 @@ export const login = async (req, res) => {
         res.cookie("token", token,{
           secure:true,
           sameSite:'none',
-          httpOnly:false
+          httpOnly:false,
+          domain:"https://task-app-rtam.onrender.com"
         });
         res.status(200).json(userFound);
       } catch (error) {
