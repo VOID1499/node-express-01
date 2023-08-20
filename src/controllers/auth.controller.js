@@ -3,6 +3,9 @@ import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import { createToken } from "../libs/jwt.js";
 
+
+
+//register
 export const register = async (req, res) => {
   const { username, email, password } = req.body;
 
@@ -28,6 +31,8 @@ export const register = async (req, res) => {
   }
 };
 
+
+//login
 export const login = async (req, res) => {
     const { email, password } = req.body;
 
@@ -40,10 +45,10 @@ export const login = async (req, res) => {
 
         const token = await createToken({ id: userFound._id });
 
-        res.cookie("token", token,{expires:new Date() +9999});
-        res.cookie(cookie_name , token ,{
-          httpOnly:false,
-          secure:false,
+        res.cookie("token", token ,{
+          secure:true,
+          sameSite:'none',
+          maxAge: 60 * 60 * 1000
         }).send('Send cookie')
         res.status(200).json(userFound);
       } catch (error) {

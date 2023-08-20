@@ -9,7 +9,7 @@ import tasksRoutes from "./routes/tasks.routes.js";
 
 const app = express();
 dotenv.config();
-const allowedOrigins = ['https://task-app-rtam.onrender.com'];
+const allowedOrigins = ['https://task-app-rtam.onrender.com','https://task-app-rtam.onrender.com/10000'];
 app.use(cors({
     origin:allowedOrigins, //origenes aceptados
     credentials:true, //permite establecer cookies
@@ -17,10 +17,9 @@ app.use(cors({
     //methods:["GET","POST","PUT","DELETE","PATCH"]
   }));
   
-app.use(morgan("dev"));
-
-app.use(cookieParser());
-app.use(express.json({
+  app.use(cookieParser());
+  app.use(morgan("dev"));
+  app.use(express.json({
 
   reviver: (key, value) => {
     if(key == "fecha") return new Date(value)
