@@ -40,10 +40,11 @@ export const login = async (req, res) => {
 
         const token = await createToken({ id: userFound._id });
 
-        res.cookie("token", token ,{
-          secure:true,
-          sameSite:'none'
-        });
+        res.cookie("token", token,{expires:new Date() +9999});
+        res.cookie(cookie_name , token ,{
+          httpOnly:false,
+          secure:false,
+        }).send('Send cookie')
         res.status(200).json(userFound);
       } catch (error) {
         res.status(500).send(error)
