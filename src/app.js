@@ -9,9 +9,9 @@ import tasksRoutes from "./routes/tasks.routes.js";
 
 const app = express();
 dotenv.config();
-
+const allowedOrigins = ['https://void1499.github.io', 'https://void1499.github.io/taskAPP'];
 app.use(cors({
-    origin:"https://void1499.github.io", //origenes aceptados
+    origin:allowedOrigins, //origenes aceptados
     credentials:true, //permite establecer cookies
     //allowedHeaders:"*", //encabezados aceptados
     //methods:["GET","POST","PUT","DELETE","PATCH"]
