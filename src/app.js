@@ -12,9 +12,8 @@ dotenv.config();
 
 app.use(cors({
     origin:"https://task-app-rtam.onrender.com", 
-    allowedHeaders: "Content-Type, Authorization",
     credentials: true,
-    sameSite:"none"
+    sameSite:"none",
   }));
   
   app.use(cookieParser());
