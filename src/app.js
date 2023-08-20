@@ -11,11 +11,10 @@ const app = express();
 dotenv.config();
 const allowedOrigins = ['https://task-app-rtam.onrender.com'];
 app.use(cors({
-   // origin:allowedOrigins, //origenes aceptados
+    origin:allowedOrigins, //origenes aceptados
     credentials:true, //permite establecer cookies
     //allowedHeaders:"*", //encabezados aceptados
     //methods:["GET","POST","PUT","DELETE","PATCH"]
-    
   }));
   
 app.use(morgan("dev"));
