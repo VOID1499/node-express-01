@@ -21,7 +21,8 @@ export const register = async (req, res) => {
 
     res.cookie("token", token,{
       secure:true,
-      sameSite:'none'
+      sameSite:'lax',
+      httpOnly:false
     });
     res.status(200).json(userSaved);
   } catch (error) {
@@ -45,9 +46,10 @@ export const login = async (req, res) => {
 
         const token = await createToken({ id: userFound._id });
 
-        res.cookie("token", token ,{
+        res.cookie("token", token,{
           secure:true,
-          sameSite:'none',
+          sameSite:'lax',
+          httpOnly:false
         });
         res.status(200).json(userFound);
       } catch (error) {
