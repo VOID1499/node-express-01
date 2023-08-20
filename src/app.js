@@ -13,8 +13,6 @@ const allowedOrigins = ['https://task-app-rtam.onrender.com'];
 app.use(cors({
     origin:allowedOrigins, //origenes aceptados
     credentials:true, //permite establecer cookies
-    secure:true
-
     //allowedHeaders:"*", //encabezados aceptados
     //methods:["GET","POST","PUT","DELETE","PATCH"]
   }));

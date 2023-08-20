@@ -16,7 +16,10 @@ export const register = async (req, res) => {
     const userSaved = await newUser.save();
     const token = await createToken({ id: userSaved._id });
 
-    res.cookie("token", token);
+    res.cookie("token", token,{
+      secure:true,
+      httpOnly:false
+    });
     res.status(200).json(userSaved);
   } catch (error) {
     if(error.code == "11000") return res.status(400).json({error:[`${Object.values(error.keyValue)[0]} no disponible`]})
