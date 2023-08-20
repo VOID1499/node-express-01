@@ -45,11 +45,11 @@ export const login = async (req, res) => {
 
         const token = await createToken({ id: userFound._id });
 
-        res.cookie("token", token ,{
+        return res.cookie("token", token ,{
           secure:true,
           sameSite:'none',
           maxAge: 60 * 60 * 1000
-        }).send('Send cookie')
+        })
         res.status(200).json(userFound);
       } catch (error) {
         res.status(500).send(error)
