@@ -8,6 +8,7 @@ import tasksRoutes from "./routes/tasks.routes.js";
 
 
 const app = express();
+app.use(cookieParser());
 dotenv.config();
 const allowedOrigins = ['https://task-app-rtam.onrender.com','https://task-app-rtam.onrender.com/10000'];
 app.use(cors({
@@ -17,7 +18,6 @@ app.use(cors({
     //methods:["GET","POST","PUT","DELETE","PATCH"]
   }));
   
-  app.use(cookieParser());
   app.use(morgan("dev"));
   app.use(express.json({
 
