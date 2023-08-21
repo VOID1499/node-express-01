@@ -33,24 +33,24 @@ export const register = async (req, res) => {
   }
 };
 
-
 //login
+
 export const login = async (req, res) => {
-    const { email, password } = req.body;
+  const { email, password } = req.body;
 
-    try {
-        const userFound = await User.findOne({email})
-        if(!userFound) return res.status(400).json({message:"Usuario no encontrado"})
-       
-        const matchPassword = await bcrypt.compare(password,userFound.password)
-        if(!matchPassword) return res.status(400).json({message:"Credenciales no validas"})
-
-        const token = await createToken({ id: userFound._id });
+  try {
+      const userFound = await User.findOne({email})
+      if(!userFound) return res.status(400).json({message:"Usuario no encontrado"})
      
-        res.status(200).json({user:userFound,token:token});
-      } catch (error) {
-        res.status(500).send(error)
-      }
+      const matchPassword = await bcrypt.compare(password,userFound.password)
+      if(!matchPassword) return res.status(400).json({message:"Credenciales no validas"})
+
+      const token = await createToken({ id: userFound._id });
+
+      res.status(200).json({user:userFound,token:token});
+    } catch (error) {
+      res.status(500).send(error)
+    }
 
 };
 
