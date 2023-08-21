@@ -6,30 +6,26 @@ import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth.routes.js";
 import tasksRoutes from "./routes/tasks.routes.js";
 
-
 const app = express();
 dotenv.config();
 
+app.use(morgan("dev"));
 app.use(cors({
-    origin:"https://task-app-rtam.onrender.com", 
-    credentials: true,
-    sameSite:"none",
-  }));
-  
-  app.use(cookieParser());
-  app.use(morgan("dev"));
-  app.use(express.json({
+  origin:'http://localhost:4200',
+  httpOnly:false,
+  allowedHeaders:"*"
+}))
+app.use(
+  express.json({
+    reviver: (key, value) => {
+      if (key == "fecha") return new Date(value);
+      return value;
+    },
+  })
+);
 
-  reviver: (key, value) => {
-    if(key == "fecha") return new Date(value)
-    return value
-  }
-
-}));
-
-
-app.get("/",(req,res)=>{
-  res.status(200).send("Hello world!")
+app.get("/", (req, res) => {
+  res.status(200).send("Hello world!");
 });
 
 app.use("/api", authRoutes);
