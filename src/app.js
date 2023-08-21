@@ -11,7 +11,7 @@ dotenv.config();
 
 app.use(morgan("dev"));
 app.use(cors({
-  origin:'http://localhost:4200',
+  origin:'https://task-app-rtam.onrender.com',
   httpOnly:false,
   allowedHeaders:"*"
 }))
