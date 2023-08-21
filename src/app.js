@@ -11,16 +11,14 @@ const app = express();
 dotenv.config();
 
 app.use(cors({
-    origin:"http://localhost:4200", //origenes aceptados
-    credentials:true, //permite establecer cookies
-    //allowedHeaders:"*", //encabezados aceptados
-    //methods:["GET","POST","PUT","DELETE","PATCH"]
+    origin:"https://task-app-rtam.onrender.com", 
+    credentials: true,
+    sameSite:"none",
   }));
   
-app.use(morgan("dev"));
-
-app.use(cookieParser());
-app.use(express.json({
+  app.use(cookieParser());
+  app.use(morgan("dev"));
+  app.use(express.json({
 
   reviver: (key, value) => {
     if(key == "fecha") return new Date(value)
@@ -28,6 +26,11 @@ app.use(express.json({
   }
 
 }));
+
+
+app.get("/",(req,res)=>{
+  res.status(200).send("Hello world!")
+});
 
 app.use("/api", authRoutes);
 app.use("/api", tasksRoutes);

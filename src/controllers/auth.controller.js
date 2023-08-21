@@ -3,6 +3,9 @@ import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import { createToken } from "../libs/jwt.js";
 
+
+
+//register
 export const register = async (req, res) => {
   const { username, email, password } = req.body;
 
@@ -16,29 +19,38 @@ export const register = async (req, res) => {
     const userSaved = await newUser.save();
     const token = await createToken({ id: userSaved._id });
 
-    res.cookie("token", token);
-    res.status(200).json({ message: "Usuario registado!" });
+    res.cookie("token", token,{
+      secure:true,
+      sameSite:'none',
+      httpOnly:false,
+      
+    });
+    res.status(200).json(userSaved);
   } catch (error) {
-    res.json({message:error})
+    if(error.code == "11000") return res.status(400).json({error:[`${Object.values(error.keyValue)[0]} no disponible`]})
+    res.status(400).json(error);
+
   }
 };
 
+//login
+
 export const login = async (req, res) => {
-    const { email, password } = req.body;
+  const { email, password } = req.body;
 
-    try {
-        const userFound = await User.findOne({email})
-        if(!userFound) return res.status(400).json({message:"Usuario no encontrado"})
-       
-        const matchPassword = await bcrypt.compare(password,userFound.password)
-        if(!matchPassword) return res.status(400).json({message:"Credenciales no validas"})
+  try {
+      const userFound = await User.findOne({email})
+      if(!userFound) return res.status(400).json({message:"Usuario no encontrado"})
+     
+      const matchPassword = await bcrypt.compare(password,userFound.password)
+      if(!matchPassword) return res.status(400).json({message:"Credenciales no validas"})
 
-        const token = await createToken({ id: userFound._id });
+      const token = await createToken({ id: userFound._id });
 
-        res.status(200).json({user:userFound,token:token});
-      } catch (error) {
-        res.status(500).send(error)
-      }
+      res.status(200).json({user:userFound,token:token});
+    } catch (error) {
+      res.status(500).send(error)
+    }
 
 };
 
