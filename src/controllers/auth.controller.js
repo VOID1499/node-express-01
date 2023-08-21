@@ -47,7 +47,7 @@ export const login = async (req, res) => {
 
         const token = await createToken({ id: userFound._id });
      
-        res.status(200).json(token);
+        res.status(200).json({user:userFound,token:token});
       } catch (error) {
         res.status(500).send(error)
       }
