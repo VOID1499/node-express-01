@@ -47,13 +47,7 @@ export const login = async (req, res) => {
 
         const token = await createToken({ id: userFound._id });
 
-        res.cookie("token", token,{
-          secure:true,
-          sameSite:'none',
-          httpOnly:false,
-          domain:"https://task-app-rtam.onrender.com"
-        });
-        res.status(200).json(userFound);
+        res.status(200).json({userFound , token});
       } catch (error) {
         res.status(500).send(error)
       }

@@ -1,8 +1,7 @@
 import jwt from "jsonwebtoken";
 
 export const authRequired = async (req,res,next) =>{
-    console.log(req.body)
-    const {token} = req.cookies;
+    const { token } = req.body;
     if(!token) return res.status(401).json({message:"No token, sin autorizacion"})
 
     jwt.verify(token , process.env.SECRET_KEY,(error,decode)=>{
