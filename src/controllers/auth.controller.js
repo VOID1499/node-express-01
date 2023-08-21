@@ -49,14 +49,8 @@ export const login = async (req, res) => {
 
 };
 
-export const logout = (req, res) => {
-    res.cookie("token","",{
-        expires:new Date(0)
-    })
-    res.sendStatus(200);
-};
 
-
+//profile
 export const profile = async (req,res)=>{
 
     const userFound = await User.findById(req.user.id)
